@@ -12,7 +12,7 @@ const OSCURO = "16222E",
   CODIGO = "E8E4D8";
 const pptx = new PptxGenJS();
 pptx.layout = "LAYOUT_16x9"; // 10 x 5,625 in
-pptx.title = "SAT (3-SAT): algoritmo exacto frente a WalkSAT";
+pptx.title = "SAT (Problema de Satisfacción Booleana): algoritmo exacto frente a la heurística WalkSAT";
 
 // --- estimador de desborde (sin render): ancho medio de caracter como fraccion del cuerpo
 const ANCHO = { Arial: 0.52, Georgia: 0.56, "Courier New": 0.6 };
@@ -154,12 +154,21 @@ const err = (x) => fn(x * 100, 1) + " %";
     0.4,
     { color: "F0B77A" },
   );
-  tx(s, "SAT (3-SAT): algoritmo exacto frente a WalkSAT", 0.6, 1.6, 8.8, 1.6, {
-    fs: 38,
+  tx(s, "SAT: Problema de Satisfacción Booleana", 0.6, 1.4, 8.8, 1.1, {
+    fs: 32,
     face: "Georgia",
     color: "FFFFFF",
     valign: "middle",
   });
+  tx(
+    s,
+    "Solución exacta (fuerza bruta) frente a la heurística WalkSAT, una búsqueda local. Instancias restringidas a 3-SAT.",
+    0.6,
+    2.55,
+    8.8,
+    0.8,
+    { fs: 18, color: "F0B77A" },
+  );
   s.addShape(pptx.ShapeType.rect, {
     x: 0.6,
     y: 3.4,
@@ -179,11 +188,12 @@ const err = (x) => fn(x * 100, 1) + " %";
   titulo(s, "El problema SAT y por qué importa");
   tx(
     s,
-    "Dada una fórmula booleana, ¿existe una asignación de verdadero/falso que la haga verdadera?",
+    "SAT: dada una fórmula booleana, ¿existe una asignación que la haga verdadera? Usamos 3-SAT: tres literales por cláusula.",
     0.5,
     1.2,
     9,
     0.65,
+    { fs: 16 },
   );
   s.addShape(pptx.ShapeType.rect, {
     x: 0.5,
@@ -211,7 +221,7 @@ const err = (x) => fn(x * 100, 1) + " %";
     w,
     2.45,
     "NP-completo",
-    "Primer problema NP-completo (Cook 1971, Levin). 3-SAT también lo es.",
+    "Primer NP-completo (Cook-Levin, 1971). Todo problema de NP se reduce a SAT. 3-SAT también.",
   );
   bloque(
     s,
@@ -229,7 +239,7 @@ const err = (x) => fn(x * 100, 1) + " %";
     w,
     2.45,
     "Buscar es difícil",
-    "Con n variables hay 2ⁿ asignaciones posibles: ese es el espacio de búsqueda.",
+    "2ⁿ asignaciones posibles. Exacto: probarlas todas. Heurística: WalkSAT.",
   );
 }
 
@@ -373,7 +383,7 @@ const err = (x) => fn(x * 100, 1) + " %";
 // ===== 6. WalkSAT =====
 {
   const s = nueva();
-  titulo(s, "Heurística: WalkSAT");
+  titulo(s, "Heurística: WalkSAT (búsqueda local)");
   tx(s, "Cómo funciona", 0.5, 1.2, 4.4, 0.4, { bold: true, color: NARANJA });
   tx(
     s,

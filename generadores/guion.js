@@ -48,7 +48,7 @@ const T = [
   [3, "Algoritmo exacto: fuerza bruta", A, "2:00", "3:10"],
   [4, "Equipo y metodología", A, "3:10", "4:00"],
   [5, "Resultado: tiempo de la fuerza bruta", A, "4:00", "5:50"],
-  [6, "Heurística: WalkSAT", A, "5:50", "6:50"],
+  [6, "Heurística: WalkSAT (búsqueda local)", A, "5:50", "6:50"],
   [7, "Exacto vs. WalkSAT: mismas fórmulas", A, "6:50", "8:20"],
   [8, "Éxitos, error relativo y tiempos", A, "8:20", "10:00"],
   [9, "Escalabilidad de WalkSAT", B, "10:00", "11:10"],
@@ -137,7 +137,7 @@ const cab = (k) => {
 const c = [];
 c.push(h1("Guion de exposición"));
 c.push(
-  par("SAT (3-SAT): algoritmo exacto frente a WalkSAT", {
+  par("SAT (Problema de Satisfacción Booleana): algoritmo exacto frente a la heurística WalkSAT", {
     size: 32,
     bold: true,
     color: AZUL,
@@ -240,9 +240,9 @@ c.push(cab(1));
 c.push(
   ...decir(
     `Buenos días, profesor. Somos ${A} y ${B}.`,
-    "Les traemos una pregunta: si tenemos una fórmula lógica con muchísimas variables, ¿se puede saber si existe alguna combinación de verdadero y falso que la haga verdadera?",
-    "Ese es el problema SAT, y fue el primer problema que se demostró NP-completo.",
-    "Vamos a ver un algoritmo exacto, que siempre acierta; una heurística, WalkSAT, que es muy rápida pero no da garantías; mediciones reales hechas en nuestro equipo; y dónde aparece SAT en la vida real, en particular en el armado de horarios.",
+    "Nuestro tema es un problema: SAT, el Problema de Satisfacción Booleana. ¿Existe alguna combinación de verdadero y falso que haga verdadera una fórmula lógica con muchísimas variables?",
+    "Fue el primer problema NP-completo, por el teorema de Cook-Levin, de 1971. En clase se lo nombró pero no se lo desarrolló, así que lo explicamos desde cero.",
+    "Vamos a ver dos formas de resolverlo: un algoritmo exacto de fuerza bruta, que siempre acierta pero es exponencial, y una heurística de búsqueda local, WalkSAT, rápida pero sin garantías. Después, mediciones reales y una aplicación: el armado de horarios.",
   ),
 );
 c.push(enganche("Empecemos por entender qué pregunta hace SAT."));
@@ -253,7 +253,7 @@ c.push(
   ...decir(
     "SAT pregunta si una fórmula booleana se puede hacer verdadera. Miren esta fórmula: tiene 4 variables y 3 cláusulas.",
     "Cada cláusula es un OR de literales: una variable o su negación. Las cláusulas se unen con AND, o sea que tienen que cumplirse todas a la vez.",
-    "En 3-SAT, cada cláusula tiene exactamente tres literales. Es el caso que usamos en el trabajo. Una variante es Max-SAT, donde no se pide cumplir todo, sino la mayor cantidad posible de cláusulas.",
+    "La consigna habla de SAT en general. Nosotros restringimos las instancias a 3-SAT, donde cada cláusula tiene exactamente tres literales: sigue siendo NP-completo y nos deja generar fórmulas de forma uniforme. Una variante es Max-SAT, donde no se pide cumplir todo, sino la mayor cantidad posible de cláusulas.",
     "Tres ideas clave. Primero: SAT es NP-completo, lo demostraron Cook y Levin, y 3-SAT también lo es. Segundo: verificar es fácil. Si me dan una asignación, recorro las cláusulas y compruebo que cada una tenga un literal verdadero: es tiempo polinomial, por eso está en NP. Tercero: buscar es difícil. Con n variables hay 2 elevado a la n asignaciones posibles. Ese es nuestro espacio de búsqueda.",
   ),
 );
@@ -307,7 +307,7 @@ c.push(
 c.push(cab(6));
 c.push(
   ...decir(
-    `WalkSAT es una búsqueda local con azar. Empieza con una asignación al azar y mira qué cláusulas están insatisfechas. Elige una de ellas y da vuelta el valor de una de sus variables. Repite hasta que todas las cláusulas se cumplan, o hasta que se le acaben los pasos.`,
+    `WalkSAT es la heurística que elegimos para SAT, y es una búsqueda local con azar. Empieza con una asignación al azar y mira qué cláusulas están insatisfechas. Elige una de ellas y da vuelta el valor de una de sus variables. Repite hasta que todas las cláusulas se cumplan, o hasta que se le acaben los pasos.`,
     "¿Qué variable da vuelta? La que rompe menos cláusulas que hoy están satisfechas. Y con probabilidad p, que en nuestras pruebas fue 0,5, da vuelta una cualquiera de la cláusula, para no quedarse atascada.",
     "Ahora la parte más importante. WalkSAT es incompleto. Si no encuentra solución, devuelve UNKNOWN. Y UNKNOWN no significa insatisfacible: significa que no la encontró. Solo el algoritmo exacto puede demostrar que no existe.",
   ),

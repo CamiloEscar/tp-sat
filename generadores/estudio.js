@@ -294,8 +294,8 @@ c.push(
   mk("Guía de estudio", { size: 64, bold: true, color: OSCURO, after: 80 }),
 );
 c.push(
-  mk("SAT (3-SAT): algoritmo exacto frente a WalkSAT", {
-    size: 36,
+  mk("SAT (Problema de Satisfacción Booleana): algoritmo exacto frente a la heurística WalkSAT", {
+    size: 34,
     bold: true,
     color: AZUL,
     after: 240,
@@ -392,63 +392,63 @@ TABLA(
 H2("0.2 Qué pide la consigna y dónde está cada punto");
 CAJA(
   "OJO",
-  "No tengo el PDF original de la consigna. Reconstruí los 9 puntos a partir de la estructura del informe y de las notas de trabajo del repositorio («TP SAT vs 9 pts consigna»). Antes de exponer, comparen esta tabla con el enunciado de la cátedra y corrijan si algún punto difiere.",
+  "La tabla sigue los 9 puntos de la consigna de la cátedra, en su orden. Aclaración de encuadre: el problema elegido (punto 1) es SAT, con instancias restringidas a 3-SAT. La fuerza bruta (punto 2) es la solución exacta de referencia y WalkSAT (punto 5) es la heurística elegida, de búsqueda local. WalkSAT no es el tema del trabajo.",
 );
 TABLA(
-  ["#", "Punto de la consigna (reconstruido)", "Dónde está", "Diapositiva"],
+  ["#", "Punto de la consigna", "Dónde está", "Diapositiva"],
   [
     [
       "1",
-      "Presentar el problema y su relevancia",
-      "Informe sec. 1; README",
+      "Elegir un problema (SAT): presentación y relevancia",
+      "Informe sec. 1, 2 y 3; README",
       "1, 2",
     ],
     [
       "2",
-      "Marco teórico: P, NP, NP-completo, SAT / 3-SAT / Max-SAT, formulación",
-      "Informe sec. 2 y sec. 3",
-      "2",
-    ],
-    [
-      "3",
-      "Algoritmo exacto: descripción y complejidad",
+      "Algoritmo exacto de fuerza bruta, parámetro mínimo n, por qué es costoso",
       "Informe sec. 4 y sec. 6; §sat.py§ → §fuerza_bruta§",
       "3",
     ],
     [
-      "4",
-      "Algoritmo heurístico: descripción, parámetros y limitaciones",
-      "Informe sec. 5; §sat.py§ → §walksat§",
-      "6",
-    ],
-    [
-      "5",
-      "Experimentación: equipo, condiciones, instancias; incluir un caso que supere la hora",
+      "3",
+      "Pruebas desde n=10 hasta superar 1 hora, tiempos registrados, condiciones controladas",
       "Informe sec. 7 y sec. 8.1; §experimentos.py§; §hardware.txt§",
       "4, 5",
     ],
     [
+      "4",
+      "Gráfico n vs. tiempo, interpretación y relación con la complejidad teórica",
+      "Informe sec. 8.1 (Gráfico 1); §graficos/1_tiempo_fuerza_bruta.png§",
+      "5",
+    ],
+    [
+      "5",
+      "Heurística (búsqueda local): funcionamiento, ventajas y limitaciones",
+      "Informe sec. 5; §sat.py§ → §walksat§",
       "6",
-      "Comparación exacto vs. heurístico sobre las mismas fórmulas, con error relativo y tabla",
+    ],
+    [
+      "6",
+      "Mismos casos del punto 3: calidad, error relativo y tiempo",
       "Informe sec. 8.2, sec. 9; §tabla_comparacion.md§",
       "7, 8",
     ],
     [
       "7",
-      "Escalabilidad de la heurística (n grande)",
+      "Heurística con n grande (n ≥ 1000): escalabilidad y viabilidad",
       "Informe sec. 8.4; §resultados_escala.csv§",
       "9",
     ],
     [
       "8",
-      "Aplicación en un contexto real (caso argentino, herramientas, impacto económico, viabilidad)",
+      "Aplicación concreta en una empresa o institución de la región",
       "Informe sec. 10 y discusión ampliada",
       "10, 11, 12, 13",
     ],
     [
       "9",
-      "Reflexión crítica, conclusiones y referencias",
-      "Informe sec. 11, sec. 12, Referencias",
+      "Informe: introducción, algoritmos, resultados, conclusiones y reflexión crítica",
+      "Informe completo (sec. 1 a 12, Referencias)",
       "14, 15, 16",
     ],
   ],
@@ -1548,7 +1548,7 @@ TABLA(
     ["3", "Algoritmo exacto: fuerza bruta", CAMILO, "2:00 a 3:10"],
     ["4", "Equipo y metodología", CAMILO, "3:10 a 4:00"],
     ["5", "Resultado: tiempo de la fuerza bruta", CAMILO, "4:00 a 5:50"],
-    ["6", "Heurística: WalkSAT", CAMILO, "5:50 a 6:50"],
+    ["6", "Heurística: WalkSAT (búsqueda local)", CAMILO, "5:50 a 6:50"],
     ["7", "Exacto vs. WalkSAT: mismas fórmulas", CAMILO, "6:50 a 8:20"],
     ["8", "Éxitos, error relativo y tiempos", CAMILO, "8:20 a 10:00"],
     ["9", "Escalabilidad de WalkSAT", FACU, "10:00 a 11:10"],
@@ -1573,15 +1573,15 @@ DIAP({
   n: 1,
   titulo: "Portada",
   tiempo: "0:00 a 0:40",
-  dice: "Título «SAT (3-SAT): algoritmo exacto frente a WalkSAT», integrantes, materia (Teoría de la Computabilidad, Prof. Pascal) y fecha. La fecha todavía dice «[completar fecha de exposición]».",
+  dice: "Título «SAT: Problema de Satisfacción Booleana», subtítulo (solución exacta de fuerza bruta frente a la heurística WalkSAT, una búsqueda local; instancias 3-SAT), integrantes, materia (Teoría de la Computabilidad, Prof. Pascal) y fecha. La fecha todavía dice «[completar fecha de exposición]».",
   detras: [
     "Es el momento de plantear la pregunta del trabajo en una frase: ¿se puede saber si una fórmula lógica con muchas variables tiene solución, y a qué costo?",
     "Tenés que poder resumir todo el TP en 20 segundos: «Desarrollamos, con asistencia de una herramienta de IA, un algoritmo exacto de fuerza bruta y una heurística, WalkSAT; los comparamos sobre las mismas fórmulas; medimos hasta dónde llega cada uno; y analizamos una aplicación posible, los horarios.»",
   ],
   decir: [
     "Saludo, presentación de ambos.",
-    "La pregunta: «si tenemos una fórmula con muchísimas variables, ¿existe alguna combinación de verdadero y falso que la haga verdadera?». Es SAT, el primer problema que se demostró NP-completo.",
-    "Qué vamos a ver, en cuatro cosas: un algoritmo exacto que siempre acierta; una heurística rápida pero sin garantías; mediciones reales en nuestro equipo; y dónde aparece en la vida real, en particular en horarios.",
+    "Dejar claro que el tema es el problema SAT, no WalkSAT: «si tenemos una fórmula con muchísimas variables, ¿existe alguna combinación de verdadero y falso que la haga verdadera?». Es SAT, el primer problema que se demostró NP-completo (Cook-Levin, 1971). En clase SAT se nombró como ejemplo de NP-completo pero no se desarrolló: por eso lo explicamos desde cero.",
+    "Qué vamos a ver sobre SAT, en cuatro cosas: un algoritmo exacto de fuerza bruta que siempre acierta; una heurística de búsqueda local, WalkSAT, rápida pero sin garantías; mediciones reales en nuestro equipo; y dónde aparece en la vida real, en particular en horarios.",
     "Anunciar el reparto: «yo hasta la diapositiva 8, Facundo desde la 9».",
   ],
   memoria:
@@ -1615,7 +1615,7 @@ DIAP({
   ],
   decir: [
     "Mostrar la fórmula: «cuatro variables, tres cláusulas. Cada cláusula es un OR de literales; las cláusulas van unidas por AND: hay que cumplir todas a la vez».",
-    "«En 3-SAT cada cláusula tiene exactamente tres literales. Es el caso que usamos en el trabajo.»",
+    "«La consigna habla de SAT. Nosotros restringimos las instancias a 3-SAT, con exactamente tres literales por cláusula: sigue siendo NP-completo y deja generar fórmulas de forma uniforme.»",
     "Las tres ideas en orden: NP-completo → verificar es fácil (polinomial) → buscar es difícil (2ⁿ).",
     "Mencionar Max-SAT en una frase, para dejarla plantada.",
   ],
@@ -1752,7 +1752,7 @@ DIAP({
 
 DIAP({
   n: 6,
-  titulo: "Heurística: WalkSAT",
+  titulo: "Heurística: WalkSAT (búsqueda local)",
   tiempo: "5:50 a 6:50",
   dice: "Cómo funciona: 1) asignación inicial al azar; 2) elegir una cláusula insatisfecha; 3) dar vuelta una variable de esa cláusula: la que rompe menos, o una al azar con probabilidad p; 4) repetir hasta cumplir todo o agotar los pasos. Es incompleta: si no encuentra devuelve UNKNOWN, y eso NO significa insatisfacible. Parámetros: p = 0,5 · 100.000 pasos (n ≤ 32) o 5.000.000 (n ≥ 100) · semillas fijas.",
   detras: [
@@ -2942,14 +2942,14 @@ TABLA(
     [
       "4",
       "§experimentos.py§ → §guardar§ / §resultados_exacto.csv§",
-      "Se escribe el CSV sin §encoding§: en Windows queda en cp1252 y «sí» se guarda como un byte no UTF-8 (se ve «s�»). §generadores/informe.js§ lo compensa leyendo en latin1; §datos.js§ lo lee como UTF-8 (no usa esa columna). §graficos.py§ lo lee con la codificación por defecto: funciona en Windows pero fallaría en Linux/macOS. Está anotado en las notas de trabajo como pendiente.",
-      "**Corregido.** §experimentos.py§ y §graficos.py§ abren y escriben con §encoding='utf-8'§ (§newline=''§ en CSV); §graficos.py§, §datos.js§ e §informe.js§ leen utf-8 y caen a cp1252/latin1 si falla. Los CSV existentes no se regeneraron (siguen en cp1252).",
+      "La primera versión escribía el CSV sin §encoding§: en Windows quedó en cp1252 y «sí» se guardó como un byte no UTF-8 (se veía «s�»).",
+      "**Corregido.** §experimentos.py§ y §graficos.py§ abren y escriben con §encoding='utf-8'§ (§newline=''§ en CSV); §graficos.py§, §datos.js§ e §informe.js§ leen utf-8 y caen a cp1252/latin1 si falla. §resultados_exacto.csv§ se convirtió de cp1252 a UTF-8 sin tocar ningún valor (ahora «sí» se lee bien en cualquier editor).",
     ],
     [
       "5",
       "Informe sec. 10.3 y diapositiva 12",
-      "El ejemplo de 9 variables y 19 cláusulas (139 asignaciones del exacto; 4 pasos de WalkSAT con semilla 1) dice haberse repetido «con el código entregado», pero **no hay ningún script en el repositorio** que lo reproduzca. Yo lo reproduje con mi propia codificación (x(c,f) = 3(c−1)+f) y obtuve exactamente 19 cláusulas, 139 asignaciones y 4 pasos, con las soluciones C1-2, C2-1, C3-2 (exacto) y C1-1, C2-2, C3-3 (WalkSAT).",
-      "Agregar un script o una función con ese ejemplo (por ejemplo §ejemplo_horarios.py§) para que se pueda mostrar y reproducir.",
+      "El ejemplo de 9 variables y 19 cláusulas (139 asignaciones del exacto; 4 pasos de WalkSAT con semilla 1) se reproduce con §ejemplo_horarios.py§ (codificación x(c,f) = 3(c−1)+f) y da exactamente 19 cláusulas, 139 asignaciones y 4 pasos, con las soluciones C1-2, C2-1, C3-2 (exacto) y C1-1, C2-2, C3-3 (WalkSAT).",
+      "Corregido. Se agregó §ejemplo_horarios.py§ (python ejemplo_horarios.py) y el informe lo cita.",
     ],
     [
       "6",
@@ -3021,7 +3021,7 @@ TABLA(
 // =====================================================================
 const doc = new Document({
   creator: "TP SAT",
-  title: "Guía de estudio · SAT (3-SAT): exacto frente a WalkSAT",
+  title: "Guía de estudio · SAT (Problema de Satisfacción Booleana): exacto frente a la heurística WalkSAT",
   description: "Material de estudio para la defensa oral del TP de SAT",
   styles: { default: { document: { run: { font: "Arial", size: 22 } } } },
   numbering: {

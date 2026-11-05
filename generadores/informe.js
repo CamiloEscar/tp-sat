@@ -324,9 +324,9 @@ c.push(
     alignment: AlignmentType.CENTER,
     children: [
       new TextRun({
-        text: "SAT (3-SAT): algoritmo exacto frente a la heurística WalkSAT",
+        text: "SAT (Problema de Satisfacción Booleana): algoritmo exacto frente a la heurística WalkSAT",
         bold: true,
-        size: 48,
+        size: 44,
         color: "1F4E79",
       }),
     ],
@@ -336,7 +336,7 @@ c.push(
     alignment: AlignmentType.CENTER,
     children: [
       new TextRun({
-        text: "Análisis de un problema NP-completo mediante implementación y comparación de soluciones exactas y heurísticas",
+        text: "Problema NP-completo con instancias restringidas a 3-SAT: fuerza bruta como solución exacta y WalkSAT (búsqueda local) como heurística",
         italics: true,
         size: 26,
       }),
@@ -368,10 +368,13 @@ c.push(
     "El problema de satisfacibilidad booleana (SAT) pregunta si existe una asignación de verdadero o falso para las variables de una fórmula que la haga verdadera. Fue el primer problema que se demostró NP-completo (Cook, 1971; Levin, 1973, de forma independiente) y por eso es el punto de partida para estudiar la dificultad de toda una clase de problemas.",
   ),
   P(
+    "La consigna del trabajo propone SAT como problema a estudiar. Como SAT admite cláusulas de cualquier longitud, las instancias de los experimentos se restringen a 3-SAT (exactamente tres literales por cláusula), que sigue siendo NP-completo y permite generar y comparar fórmulas de forma uniforme. Sobre ese problema se contrastan dos formas de resolverlo: un algoritmo exacto de fuerza bruta, que sirve como línea de base, y WalkSAT, la heurística elegida, que es una búsqueda local.",
+  ),
+  P(
     "SAT importa también en la práctica: muchos problemas de decisión se pueden traducir a una fórmula booleana y entregar a un solver. Entre los usos documentados están la verificación de hardware y software mediante bounded model checking (Biere, Cimatti, Clarke y Zhu, 1999), la planificación como satisfacibilidad (Kautz y Selman, 1992), la resolución de dependencias de paquetes (por ejemplo, Eclipse con Sat4j, Le Berre y Parrain, 2010, y libsolv en openSUSE) y la programación de horarios con SAT y MaxSAT (Asín Achá y Nieuwenhuis, 2014). La sección 10 desarrolla estos casos.",
   ),
   P(
-    "El objetivo de este trabajo es comprender la dificultad de SAT de forma experimental. Se desarrolló, con asistencia de una herramienta de IA (ver sección 7.4), un algoritmo exacto de fuerza bruta y una heurística (WalkSAT), se los comparó sobre exactamente las mismas fórmulas, se midió hasta dónde llega cada uno y se analizó una aplicación posible: la asignación de horarios de cursada.",
+    "El objetivo de este trabajo es comprender la dificultad de SAT de forma experimental. Para resolverlo se programó, con asistencia de una herramienta de IA (ver sección 7.4), un algoritmo exacto de fuerza bruta y una heurística de búsqueda local (WalkSAT), se los comparó sobre exactamente las mismas fórmulas, se midió hasta dónde llega cada uno y se analizó una aplicación posible: la asignación de horarios de cursada.",
   ),
   P(
     `Todos los números de resultados de este informe salen de ejecuciones reales del código entregado, en el equipo descripto en la sección 7 (${hw["CPU"]}). Los tiempos de mediciones anteriores, hechas en otra máquina, se descartaron.`,
@@ -964,7 +967,7 @@ c.push(
   ),
   H2("10.3 Modelo propio para la FRCU (hipotético, no documentado)"),
   P(
-    "[hipotético, no documentado] No se encontró evidencia pública de que la UTN Facultad Regional Concepción del Uruguay ni otra institución de Concepción del Uruguay o de Entre Ríos use SAT para armar horarios. Lo que sigue es un modelo propio, sin datos reales de la institución.",
+    "[hipotético, no documentado] No se encontró evidencia pública de que la UTN Facultad Regional Concepción del Uruguay ni otra institución de Concepción del Uruguay o de Entre Ríos use SAT para armar horarios. Lo que sigue es un modelo propio, sin datos reales de la institución. Se asume que la FRCU publica los horarios de cursada como documentos PDF con comisiones, día y franja [VERIFICAR: comprobar esa afirmación y citar la fuente o URL antes de entregar].",
   ),
   P(
     "Variable x(c,f): la comisión c se dicta en la franja f. Restricciones como cláusulas:",
@@ -983,7 +986,7 @@ c.push(
     "Aulas y capacidad: se modelan agregando variables para el aula y cláusulas análogas. No se implementó.",
   ),
   P(
-    "**Ejemplo de juguete (hipotético, no es el horario real).** 3 comisiones y 3 franjas, es decir 9 variables y 19 cláusulas (3 de “al menos una”, 9 de “a lo sumo una”, 6 de conflicto y 1 unitaria). C1 y C2 comparten docente, C2 y C3 comparten alumnos y el docente de C3 no puede en la franja 1. Numerando x(c,f) = 3(c−1) + f, el algoritmo exacto devolvió SAT tras evaluar 139 asignaciones, con C1 en la franja 2, C2 en la 1 y C3 en la 2. WalkSAT (semilla 1) devolvió SAT en 4 pasos, con C1 en la franja 1, C2 en la 2 y C3 en la 3. Ambas soluciones cumplen todas las cláusulas. (Estas corridas se repitieron con el código entregado, sat.py, para este informe.) La fórmula no es 3-SAT puro (tiene cláusulas de 1, 2 y 3 literales), pero se puede convertir a 3-SAT con el procedimiento de la sección 2.5.",
+    "**Ejemplo de juguete (hipotético, no es el horario real).** 3 comisiones y 3 franjas, es decir 9 variables y 19 cláusulas (3 de “al menos una”, 9 de “a lo sumo una”, 6 de conflicto y 1 unitaria). C1 y C2 comparten docente, C2 y C3 comparten alumnos y el docente de C3 no puede en la franja 1. Numerando x(c,f) = 3(c−1) + f, el algoritmo exacto devolvió SAT tras evaluar 139 asignaciones, con C1 en la franja 2, C2 en la 1 y C3 en la 2. WalkSAT (semilla 1) devolvió SAT en 4 pasos, con C1 en la franja 1, C2 en la 2 y C3 en la 3. Ambas soluciones cumplen todas las cláusulas. (Estas corridas se reproducen con el script ejemplo_horarios.py, que usa sat.py.) La fórmula no es 3-SAT puro (tiene cláusulas de 1, 2 y 3 literales), pero se puede convertir a 3-SAT con el procedimiento de la sección 2.5.",
   ),
   H2("10.4 Impacto económico y logístico"),
   P(
@@ -1113,7 +1116,7 @@ refs.forEach((r) => c.push(REF(r)));
 // ---------------------------------------------------------------- documento
 const doc = new Document({
   creator: "TP SAT",
-  title: "SAT (3-SAT): algoritmo exacto frente a la heurística WalkSAT",
+  title: "SAT (Problema de Satisfacción Booleana): algoritmo exacto frente a la heurística WalkSAT",
   styles: {
     default: { document: { run: { font: FUENTE, size: 22 } } },
     paragraphStyles: [

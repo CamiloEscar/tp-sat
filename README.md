@@ -1,4 +1,13 @@
-# SAT (3-SAT): fuerza bruta vs. WalkSAT
+# SAT (Problema de Satisfacción Booleana): algoritmo exacto vs. heurística WalkSAT
+
+**Problema:** SAT, el Problema de Satisfacción Booleana: dada una fórmula booleana, decidir si existe una asignación de verdadero/falso que la haga verdadera. Es NP-completo (teorema de Cook-Levin, 1971). Las instancias de los experimentos se restringen a 3-SAT (tres literales por cláusula).
+
+**Algoritmos que se comparan sobre las mismas fórmulas:**
+
+- Exacto (línea de base): fuerza bruta, prueba las 2^n asignaciones. Es completo, pero crece exponencialmente.
+- Heurística: WalkSAT, una búsqueda local estocástica. Es rápida con n grande, pero incompleta: si no encuentra solución devuelve UNKNOWN, que no prueba insatisfacibilidad.
+
+El tema del trabajo es SAT; WalkSAT es la heurística elegida para resolverlo.
 
 Solo se necesita Python 3.9+ y matplotlib (para los gráficos). El resto es biblioteca estándar.
 
@@ -32,7 +41,9 @@ Solo se necesita Python 3.9+ y matplotlib (para los gráficos). El resto es bibl
 
 5. Control aparte de los modelos: `python verificar_modelos.py` re-corre WalkSAT (10 semillas) sobre las instancias planted de `instancias/` y confirma con `contar_insatisfechas` que cada modelo devuelto deja 0 cláusulas insatisfechas (120 de 120). WalkSAT por sí solo declara SAT cuando no quedan cláusulas insatisfechas según sus contadores internos; no llama a `contar_insatisfechas`.
 
-Opcional: `python sat.py` (ejemplo del enunciado) y `python experimentos.py densidad` (variación de cláusulas por variable, n=16).
+6. Documentos (opcional): `SAT_Informe.docx`, `SAT_Presentacion.pptx`, `SAT_Guion_Exposicion.docx` y `GUIA_DE_ESTUDIO.docx` se generan con Node.js leyendo los CSV y `hardware.txt`, así que las cifras no se copian a mano. Una vez, `cd generadores && npm install`; después, desde la raíz: `node generadores/informe.js`, `node generadores/presentacion.js`, `node generadores/guion.js` y `node generadores/estudio.js`.
+
+Opcional: `python ejemplo_horarios.py` (ejemplo de juguete HIPOTÉTICO de horarios del informe, sección 10.3), `python sat.py` (ejemplo del enunciado) y `python experimentos.py densidad` (variación de cláusulas por variable, n=16).
 
 ## Salidas
 
